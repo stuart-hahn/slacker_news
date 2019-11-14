@@ -34,6 +34,17 @@ class CategoriesController < ApplicationController
         @categories = Category.all
     end
 
+    def destroy
+        @category = Category.find_by(id: params[:id])
+        if current_user.categories.include?(@category)
+            @category.destroy
+            redirect_back(fallback_location: root_path)
+        else
+            flash.now[:alert] = "You are not authorized to delete this Category"
+            redirect_back(fallback_location: root_path)
+        end
+    end
+
     private
 
     def category_params
