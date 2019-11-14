@@ -18,4 +18,8 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]
     end
   end
+
+  def owns_category?(category)
+    self == category.user
+  end
 end

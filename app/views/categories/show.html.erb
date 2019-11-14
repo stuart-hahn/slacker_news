@@ -3,3 +3,8 @@
 <% @category.links.each do |link| %>
     <%= link_to link.title, link_path(link) %>
 <% end %>
+
+<% if current_user && current_user.owns_category?(@category) %>
+    <%= link_to 'Edit Category', edit_category_path(@category) %> or 
+    <%= link_to 'Delete Category', category_path(@category), method: :delete %>
+<% end %>
