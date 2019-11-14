@@ -4,8 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable
 
+  has_many :categories
   has_many :links
-  has_many :categories, through: :links
+  has_many :used_categories, through: :links, source: :category
   has_many :comments
   has_many :links, through: :comments
 

@@ -8,7 +8,7 @@
     - has_many :links
     - has_many :categories, through: :links
     - has_many :comments
-    - has_many :links, through: :comments
+    - has_many :commented_links, through: :comments
 
 ## LINK
 
@@ -35,3 +35,4 @@
     
     - has_many :links
     - has_many :users, through: :links
+    - belongs_to :user
