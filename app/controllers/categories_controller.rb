@@ -4,11 +4,12 @@ class CategoriesController < ApplicationController
     end
 
     def create
-        @category = Category.new(category_params)
+        @category = current_user.categories.build(category_params)
         if @category.save
-            redirect_to category_path(@category)
+            redirect_to category_path(@category), notice: "Category successfully created"
         else
-            render :new, alert: "Failed to create Category"
+            flash.now[:alert] = "Failed to create Category"
+            render :new
         end
     end
 
@@ -19,7 +20,7 @@ class CategoriesController < ApplicationController
     def update
         @category = Category.find_by(id: params[:id])
         if @category.update(category_params)
-            redirect_to category_path(@category)
+            redirect_to category_path(@category), notice: "Category successfully created"
         else
             render :edit, alert: "Failed to edit Category"
         end
@@ -36,6 +37,6 @@ class CategoriesController < ApplicationController
     private
 
     def category_params
-        params.require(:category).permit(:title)
+        params.require(:category).permit(:title, :user_id)
     end
 end
