@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   resources :comments
   resources :links
 
-  root "links#index"
+  root "categories#index"
 end

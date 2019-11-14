@@ -1,6 +1,4 @@
-<h1>Category Show</h1>
-
-<%= @category.title %>
+<h1>Category Show: <%= @category.title %></h1>
 
 <% @category.links.each do |link| %>
     <%= link_to link.title, link_path(link) %>
