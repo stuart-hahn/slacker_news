@@ -12,6 +12,19 @@ class CategoriesController < ApplicationController
         end
     end
 
+    def edit
+        @category = Category.find_by(id: params[:id])
+    end
+
+    def update
+        @category = Category.find_by(id: params[:id])
+        if @category.update(category_params)
+            redirect_to category_path(@category)
+        else
+            render :edit, alert: "Failed to edit Category"
+        end
+    end
+
     def show
         @category = Category.find_by(id: params[:id])
     end
