@@ -1,10 +1,13 @@
 <h1>Category Show: <%= @category.title %></h1>
 
+<ul>
 <% @category.links.each do |link| %>
-    <%= link_to link.title, link_path(link) %>
+    <li><%= link_to link.title, link_path(link) %>
+    <% if current_user && current_user.owns_link?(link) %>
+        (<%= link_to 'Edit', edit_link_path(link) %> or 
+        <%= link_to 'Delete', link_path(link), method: :delete %>)
+    <% end %>
+    </li>
 <% end %>
 
-<% if current_user && current_user.owns_category?(@category) %>
-    <%= link_to 'Edit Category', edit_category_path(@category) %> or 
-    <%= link_to 'Delete Category', category_path(@category), method: :delete %>
-<% end %>
+</ul>

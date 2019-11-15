@@ -9,7 +9,7 @@ class Link < ApplicationRecord
     validates :url, presence: true
 
     def category_title=(title)
-        self.category = Category.find_or_create_by(title: title, user_id: current_user.id)
+        self.category = Category.find_or_create_by(title: title)
       end
     
     def category_title

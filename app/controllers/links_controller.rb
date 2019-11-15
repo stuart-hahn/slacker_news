@@ -7,6 +7,7 @@ class LinksController < ApplicationController
 
     def create
         @link = current_user.links.build(link_params)
+        @link.user_id = current_user.id
         if @link.save
             redirect_to link_path(@link), notice: "Link Successfully Created"
         else
@@ -17,6 +18,10 @@ class LinksController < ApplicationController
 
     def show
         @link = Link.find_by(id: params[:id])
+    end
+
+    def index
+        @links = Link.all
     end
 
     private
